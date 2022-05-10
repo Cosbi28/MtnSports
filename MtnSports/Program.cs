@@ -1,3 +1,7 @@
+using Abstractions.Repositories;
+using Abstractions.Services;
+using AppLogic;
+using DataAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MtnSports.Data;
@@ -8,11 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+builder.Services.AddScoped<IItemService, ItemService>();
+
+
+builder.Services.AddDbContext<MtnSportsAppContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MtnSportsConnection")));
 
 var app = builder.Build();
 
@@ -39,6 +51,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+
+//app.MapRazorPages();
 
 app.Run();
