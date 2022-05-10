@@ -35,7 +35,20 @@ namespace DataAccess
                 return _itemRepository;
             }
         }
+        private IOrderRepository? _orderRepository;
 
-      
+        public IOrderRepository OrderRepository
+        {
+            get
+            {
+                if (_orderRepository == null)
+                {
+                    _orderRepository = new OrderRepository(_mtnSportsAppContext);
+                }
+
+                return _orderRepository;
+            }
+        }
+
     }
 }

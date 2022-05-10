@@ -22,6 +22,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 
 builder.Services.AddDbContext<MtnSportsAppContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MtnSportsConnection")));

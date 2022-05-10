@@ -9,6 +9,7 @@ namespace Abstractions.Repositories
     public interface IRepositoryWrapper
     {
         IItemRepository ItemRepository { get; }
+        IOrderRepository OrderRepository { get; }
         void Save();
     }
 }

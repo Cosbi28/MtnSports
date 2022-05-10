@@ -5,23 +5,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MtnSports.Controllers
 {
-    public class ItemController : Controller
+    public class OrderController : Controller
     {
-        private readonly IItemService _itemService;
+        private readonly IOrderService _orderService;
 
-        public ItemController(IItemService itemService)
+        public OrderController(IOrderService orderService)
         {
-            _itemService = itemService;
+            _orderService = orderService;
         }
 
         public IActionResult Index()
         {
-            return View(_itemService.GetAllItems());
+            return View(_orderService.GetAllOrders());
         }
 
         public IActionResult Details(int id)
         {
-            var item = _itemService.GetItemById(id);
+            var item = _orderService.GetOrderById(id);
 
             if (item == null)
             {
@@ -38,19 +38,19 @@ namespace MtnSports.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([FromForm] Item item)
+        public IActionResult Create([FromForm] Order order)
         {
             if (ModelState.IsValid)
             {
-                _itemService.CreateItem(item);
+                _orderService.CreateOrder(order);
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(order);
         }
 
         public IActionResult Edit(int id)
         {
-            var item = _itemService.GetItemById(id);
+            var item = _orderService.GetOrderById(id);
             if (item == null)
             {
                 return NotFound();
@@ -60,9 +60,9 @@ namespace MtnSports.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id, Name, Type, Brand, Size, Price, Description, Photo, Stock")] Item item)
+        public IActionResult Edit(int id, [Bind("Id, IdUser, PickupDate, ReturnDate, TotalPrice")] Order order)
         {
-            if (id != item.Id)
+            if (id != order.Id)
             {
                 return NotFound();
             }
@@ -71,19 +71,19 @@ namespace MtnSports.Controllers
             {
                 try
                 {
-                    _itemService.UpdateItem(item);
+                    _orderService.UpdateOrder(order);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(order);
         }
 
         public IActionResult Delete(int id)
         {
-            var item = _itemService.GetItemById(id);
+            var item = _orderService.GetOrderById(id);
             if (item == null)
             {
                 return NotFound();
@@ -96,8 +96,9 @@ namespace MtnSports.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _itemService.DeleteItem(_itemService.GetItemById(id));
+            _orderService.DeleteOrder(_orderService.GetOrderById(id));
             return RedirectToAction(nameof(Index));
         }
     }
 }
+
