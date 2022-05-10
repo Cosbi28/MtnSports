@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataModels
 {
-    public class ItemOrder : EntityModel
+    public class ItemOrder
     {
+        public int Id { get; set; }
         public int IdOrder { get; set; }
 
         public int IdItem { get; set; }
