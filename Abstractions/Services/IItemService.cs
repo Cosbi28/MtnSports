@@ -14,6 +14,9 @@ namespace Abstractions.Services
         void DeleteItem(Item item);
         Item GetItemById(int id);
         List<Item> GetAllItems();
-        
+        List<Item> GetSearchResults(SearchViewModel search);
+        List<Item> GetSortedResults(string sort, List<Item> items);
+
+
     }
 }

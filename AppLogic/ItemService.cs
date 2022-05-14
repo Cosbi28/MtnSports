@@ -35,6 +35,27 @@ namespace AppLogic
             return _repositoryWrapper.ItemRepository.FindByCondition(c => c.Id == id).FirstOrDefault();
         }
 
+        public List<Item> GetSearchResults(SearchViewModel search)
+        {
+            return _repositoryWrapper.ItemRepository
+                .FindByCondition(c => c.Name!.Contains(search.ItemName) && c.Stock > 0).ToList();
+        }
+
+        public List<Item> GetSortedResults(string sort,List<Item> items)
+        {
+            switch(sort)
+            {
+                default: 
+                    break;
+                case "ascending":
+                    return items.OrderBy(i=>i.Name).ToList();
+                case "descending":
+                    return items.OrderByDescending(i => i.Name).ToList();
+
+            }
+            return items;
+        }
+
         public void UpdateItem(Item item)
         {
             _repositoryWrapper.ItemRepository.Update(item);
