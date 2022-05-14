@@ -11,7 +11,11 @@ namespace DataModels
         public int Id { get; set; }
         public int IdOrder { get; set; }
 
+        public Order? Order { get; set; }
+
         public int IdItem { get; set; }
+
+        public Item? Item { get; set; }
 
         public int Quantity { get; set; }
     }

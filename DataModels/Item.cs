@@ -24,5 +24,7 @@ namespace DataModels
         public string Photo { get; set; }
 
         public int Stock { get; set; }
+
+        public ICollection<ItemOrder>? ItemOrders { get; set; }
     }
 }

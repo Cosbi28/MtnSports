@@ -12,5 +12,7 @@
         public string Email { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public ICollection<Order>? Orders { get; set; }
     }
 }
