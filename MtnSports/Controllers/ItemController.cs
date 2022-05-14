@@ -2,6 +2,7 @@
 using DataModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace MtnSports.Controllers
 {
@@ -19,6 +20,24 @@ namespace MtnSports.Controllers
             return View(_itemService.GetAllItems());
         }
 
+        public IActionResult Results(SearchViewModel search)
+        {
+            List<Item> searchResults = _itemService.GetSearchResults(search);
+            TempData["ItemList"] = JsonConvert.SerializeObject(searchResults);
+            return View(searchResults);
+        }
+
+        [HttpPost]
+        
+        public IActionResult Results(string sort)
+        {
+            var new_list = JsonConvert.DeserializeObject<List<Item>>(TempData["ItemList"].ToString());
+            TempData["ItemList"] = JsonConvert.SerializeObject(new_list);
+            List<Item> sortResults = _itemService.GetSortedResults(sort,new_list);
+            return View(sortResults);
+        }
+
+
         public IActionResult Details(int id)
         {
             var item = _itemService.GetItemById(id);
@@ -35,6 +54,8 @@ namespace MtnSports.Controllers
         {
             return View();
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
