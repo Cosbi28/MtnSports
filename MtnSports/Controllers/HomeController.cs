@@ -1,5 +1,6 @@
 ﻿using Abstractions.Services;
 using DataModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MtnSports.Models;
 using System.Diagnostics;
