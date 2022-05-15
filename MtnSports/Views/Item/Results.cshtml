@@ -6,10 +6,10 @@
 <div class="container">
     <main role="main" class="pb-3">
 
-        <h1>Index</h1>
+        <h1>Search results</h1>
 <form class="d-flex" method="post">
         <p>
-            <button type="submit" asp-action="Results" asp-route-sort="ascending" class="btn btn-primary">
+            <button type="submit" asp-action="Results" asp-route-sort="ascending" class="btn btn-primary me-1">
            Sort Ascending
 
             </button>
@@ -20,8 +20,8 @@
             </button>
         </p>
         </form>
-        <table class="table">
-            <thead>
+        <div >
+            @*<thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Id)
@@ -42,6 +42,9 @@
                         @Html.DisplayNameFor(model => model.Price)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Photo)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Description)
                     </th>
                     <th>
@@ -52,12 +55,12 @@
                     </th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+            </thead>*@
+            <div>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
+                    <div class="d-flex w-75" style="border-style:solid;border-width: 2px;margin-bottom:8px;border-radius: 10px">
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.Id)
                         </td>
                         <td>
@@ -74,26 +77,38 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
+                        </td>*@
+                       @* <td>
                             @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
+                        </td>*@
+                        <div class="container" >
                             @*@Html.DisplayFor(modelItem => item.Photo)*@
-                            <img src="~/images/@item.Photo"></img>
-                        </td>
-                        <td>
+                            <img src="~/images/@item.Photo" class="img-fluid" style="height:300px;width:300px"></img>
+                        </div> 
+                         <div class="container-fluid" style="font-size:25px" >
+                            <h1 class="text-primary" style="margin-bottom:2px">@Html.DisplayFor(modelItem => item.Name)
+                            </h1>
+                            <h3 class="text-primary" >Brand: @Html.DisplayFor(modelItem => item.Brand)
+                            </h3>
+                            <h3 class="text-primary" >Size: @Html.DisplayFor(modelItem => item.Size)
+                            </h3>
+                             <h3 class="text-primary mb-4" >Price: @Html.DisplayFor(modelItem => item.Price)
+                            </h3>
+                            <div>@Html.DisplayFor(modelItem => item.Description)
+                            </div>
+                        </div>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.Stock)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary">Delete</a>
-                        </td>
-                    </tr>
+                        </td>*@
+                        <div>
+                          @*  <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> *@
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info mt-auto" >See item</a> 
+                            @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary">Delete</a>*@
+                        </div>
+                    </div>
                 }
-            </tbody>
-        </table>
+            </div>
+        </div>
 
     </main>
 </div>

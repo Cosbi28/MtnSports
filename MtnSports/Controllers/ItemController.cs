@@ -15,6 +15,7 @@ namespace MtnSports.Controllers
             _itemService = itemService;
         }
 
+
         public IActionResult Index()
         {
             return View(_itemService.GetAllItems());
@@ -26,6 +27,8 @@ namespace MtnSports.Controllers
             TempData["ItemList"] = JsonConvert.SerializeObject(searchResults);
             return View(searchResults);
         }
+
+
 
         [HttpPost]
         

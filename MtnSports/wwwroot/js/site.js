@@ -2,3 +2,9 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+jQuery(document).ready(function () {
+    $("#isChecked").change(function () {
+        document.getElementById("rentButton").disabled = false;
+    });
+});
