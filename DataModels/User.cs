@@ -1,4 +1,6 @@
-﻿namespace DataModels
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace DataModels
 {
     public class User
     {
