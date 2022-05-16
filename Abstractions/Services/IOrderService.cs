@@ -12,7 +12,9 @@ namespace Abstractions.Services
         void CreateOrder(Order order);
         void UpdateOrder(Order order);
         void DeleteOrder(Order order);
+        void ReturnOrder(Order order);
         Order GetOrderById(int id);
         List<Order> GetAllOrders();
+        List<Order> GetUserOrders(string userId);
     }
 }

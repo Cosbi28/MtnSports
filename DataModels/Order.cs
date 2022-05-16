@@ -10,7 +10,7 @@ namespace DataModels
     {
         public int Id { get; set; }
 
-        public int IdUser { get; set; }
+        public string IdUser { get; set; }
 
         public User? User { get; set; }
 
@@ -19,6 +19,7 @@ namespace DataModels
         public DateTime ReturnDate { get; set; }
 
         public double TotalPrice { get; set; }
+        public bool IsReturned { get; set; } = false;
 
         public ICollection<ItemOrder>? ItemOrders { get; set; }  
     }

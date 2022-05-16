@@ -50,5 +50,20 @@ namespace DataAccess
             }
         }
 
+        private IItemOrderRepository? _itemOrderRepository;
+
+        public IItemOrderRepository ItemOrderRepository
+        {
+            get
+            {
+                if (_itemOrderRepository == null)
+                {
+                    _itemOrderRepository = new ItemOrderRepository(_mtnSportsAppContext);
+                }
+
+                return _itemOrderRepository;
+            }
+        }
+
     }
 }

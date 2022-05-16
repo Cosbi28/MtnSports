@@ -14,9 +14,9 @@ namespace MtnSports.Controllers
             _orderService = orderService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string userId)
         {
-            return View(_orderService.GetAllOrders());
+            return View(_orderService.GetUserOrders(userId));
         }
 
         public IActionResult Details(int id)
@@ -38,12 +38,12 @@ namespace MtnSports.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([FromForm] Order order)
+        public IActionResult Create([FromForm] Order order, string userId)
         {
             if (ModelState.IsValid)
             {
                 _orderService.CreateOrder(order);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { userId = userId });
             }
             return View(order);
         }
@@ -94,10 +94,29 @@ namespace MtnSports.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id, string userId)
         {
             _orderService.DeleteOrder(_orderService.GetOrderById(id));
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new { userId = userId });
+        }
+
+        public IActionResult Return(int id)
+        {
+            var item = _orderService.GetOrderById(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return View(item);
+        }
+
+        [HttpPost, ActionName("Return")]
+        [ValidateAntiForgeryToken]
+        public IActionResult ReturnConfirmed(int id, string userId)
+        {
+            _orderService.ReturnOrder(_orderService.GetOrderById(id));
+            return RedirectToAction("Index", new { userId = userId });
         }
     }
 }
