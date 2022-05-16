@@ -2,6 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
+<script>
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDate();
+document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+</script>
+
 @model DataModels.SearchViewModel
 
 <head>
@@ -18,8 +26,10 @@
 <div class="container-fluid  position-absolute top-50 start-50 translate-middle">
     <form class="d-flex bg-primary p-4 rounded" method="post" asp-action="Search">
         <input asp-for="ItemName" class="form-control me-sm-2" type="text" placeholder="Search">
-        <input asp-for="PickUpDate" class="form-control me-sm-2" type="date" required placeholder="Pick-up date">
-        <input asp-for="ReturnDate" class="form-control me-sm-2" type="date" required placeholder="Return date">
+        <input asp-for="PickUpDate" class="form-control me-sm-2" type="date" id="datePickerId" required placeholder="Pick-up date">
+        <input asp-for="ReturnDate" class="form-control me-sm-2" type="date" id="datePickerId2" required placeholder="Return date">
         <button class="btn btn-secondary " type="submit">Search</button>
     </form>
 </div>
+
+
