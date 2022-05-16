@@ -18,8 +18,8 @@
 <div class="container-fluid  position-absolute top-50 start-50 translate-middle">
     <form class="d-flex bg-primary p-4 rounded" method="post" asp-action="Search">
         <input asp-for="ItemName" class="form-control me-sm-2" type="text" placeholder="Search">
-        <input asp-for="PickUpDate" class="form-control me-sm-2" type="datetime-local" required placeholder="Pick-up date">
-        <input asp-for="ReturnDate" class="form-control me-sm-2" type="datetime-local" required placeholder="Return date">
+        <input asp-for="PickUpDate" class="form-control me-sm-2" type="date" required placeholder="Pick-up date">
+        <input asp-for="ReturnDate" class="form-control me-sm-2" type="date" required placeholder="Return date">
         <button class="btn btn-secondary " type="submit">Search</button>
     </form>
 </div>

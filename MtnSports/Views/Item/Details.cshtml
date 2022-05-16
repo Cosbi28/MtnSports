@@ -6,12 +6,12 @@
 
 <div class="container">
     <main role="main" class="pb-3">
-        <h1>Details</h1>
+        <h1 class="text-primary">@Html.DisplayFor(modelItem => Model.Name)</h1>
 
         <div>
-            <h4>User</h4>
+          
             <hr />
-            <dl class="row">
+           @* <dl class="row">
                 <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.Name)
                 </dt>
@@ -60,11 +60,62 @@
                 <dd class = "col-sm-10">
                     @Html.DisplayFor(model => model.Stock)
                 </dd>
-            </dl>
+            </dl>*@
         </div>
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> |
-            <a asp-action="Index" class="btn btn-info">Back to List</a>
+       <div class="d-flex w-75 mb-5" style="margin-bottom:8px">
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Brand)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Size)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>*@
+                       @* <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>*@
+                        <div class="container" >
+                            @*@Html.DisplayFor(modelItem => item.Photo)*@
+                            <img src="~/images/@Model.Photo" class="img-fluid" style="height:300px;width:300px"></img>
+                        </div> 
+                         <div class="container-fluid" style="font-size:25px" >
+                            <div class="container-fluid" style="font-size:25px" >
+                            <h3 class="text-primary" >Brand: @Html.DisplayFor(modelItem => Model.Brand)
+                            </h3>
+                            <h3 class="text-primary" >Size: @Html.DisplayFor(modelItem => Model.Size)
+                            </h3>
+                             <h3 class="text-primary mb-4" >Price: @Html.DisplayFor(modelItem => Model.Price)
+                            </h3>
+                            <div>@Html.DisplayFor(modelItem => Model.Description)
+                            </div>
+                        </div>
+                        </div>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Stock)
+                        </td>*@
+
+                    </div>
+                    <hr />
+        <div class="form-check mt-5">
+
+  <p>By pressing "Rent", I accept the Terms and Conditions.</p>
+
+  <div>
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-1">Rent</a> 
+            <a asp-action="Index" class="btn btn-info">Back</a>
         </div>
-    </main>
 </div>
+
+    </main>
+</div> 
+    
