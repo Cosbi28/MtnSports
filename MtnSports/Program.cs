@@ -47,6 +47,8 @@ builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
+builder.Services.AddScoped<IItemOrderService, ItemOrderService>();
+builder.Services.AddScoped<IItemOrderRepository, ItemOrderRepository>();
 
 builder.Services.AddDbContext<MtnSportsAppContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MtnSportsConnection")));
 

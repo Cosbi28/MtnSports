@@ -10,6 +10,7 @@ namespace Abstractions.Repositories
     {
         IItemRepository ItemRepository { get; }
         IOrderRepository OrderRepository { get; }
+        IItemOrderRepository ItemOrderRepository { get; }
         void Save();
     }
 }

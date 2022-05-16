@@ -39,6 +39,21 @@ namespace AppLogic
             return _repositoryWrapper.OrderRepository.FindByCondition(c => c.Id == id).FirstOrDefault();
         }
 
+        public List<Order> GetUserOrders(string userId)
+        {
+            return _repositoryWrapper.OrderRepository.FindByCondition(c => c.IdUser == userId).ToList();
+        }
+
+        public void ReturnOrder(Order order)
+        {
+            order.IsReturned = true;
+            _repositoryWrapper.OrderRepository.Update(order);
+            _repositoryWrapper.Save();
+
+            var itemOrder = _repositoryWrapper.ItemOrderRepository.FindByCondition(c => c.IdOrder == order.Id).FirstOrDefault();
+            _repositoryWrapper.ItemRepository.UpdateItemStock(itemOrder.IdItem, itemOrder.Quantity);
+        }
+
         public void UpdateOrder(Order order)
         {
             _repositoryWrapper.OrderRepository.Update(order);

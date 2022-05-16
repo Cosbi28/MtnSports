@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MtnSportsAppContext))]
-    [Migration("20220510091640_init")]
-    partial class init
+    [Migration("20220516081319_AddIsReturnedOnOrder")]
+    partial class AddIsReturnedOnOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -81,10 +81,20 @@ namespace DataAccess.Migrations
                     b.Property<int>("IdOrder")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("ItemOrders");
                 });
@@ -97,8 +107,12 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int");
+                    b.Property<string>("IdUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsReturned")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("PickupDate")
                         .HasColumnType("datetime2");
@@ -109,7 +123,12 @@ namespace DataAccess.Migrations
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -144,6 +163,45 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DataModels.ItemOrder", b =>
+                {
+                    b.HasOne("DataModels.Item", "Item")
+                        .WithMany("ItemOrders")
+                        .HasForeignKey("ItemId");
+
+                    b.HasOne("DataModels.Order", "Order")
+                        .WithMany("ItemOrders")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("DataModels.Order", b =>
+                {
+                    b.HasOne("DataModels.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataModels.Item", b =>
+                {
+                    b.Navigation("ItemOrders");
+                });
+
+            modelBuilder.Entity("DataModels.Order", b =>
+                {
+                    b.Navigation("ItemOrders");
+                });
+
+            modelBuilder.Entity("DataModels.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
