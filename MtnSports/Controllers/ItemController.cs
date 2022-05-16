@@ -1,5 +1,6 @@
 ﻿using Abstractions.Services;
 using DataModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -15,6 +16,7 @@ namespace MtnSports.Controllers
             _itemService = itemService;
         }
 
+        [Authorize(Roles="Admin")]
         public IActionResult Index()
         {
             return View(_itemService.GetAllItems());
@@ -37,7 +39,6 @@ namespace MtnSports.Controllers
             return View(sortResults);
         }
 
-
         public IActionResult Details(int id)
         {
             var item = _itemService.GetItemById(id);
@@ -50,13 +51,14 @@ namespace MtnSports.Controllers
             return View(item);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([FromForm] Item item)
@@ -69,6 +71,7 @@ namespace MtnSports.Controllers
             return View(item);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var item = _itemService.GetItemById(id);
@@ -79,6 +82,7 @@ namespace MtnSports.Controllers
             return View(item);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id, Name, Type, Brand, Size, Price, Description, Photo, Stock")] Item item)
@@ -102,6 +106,7 @@ namespace MtnSports.Controllers
             return View(item);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var item = _itemService.GetItemById(id);
@@ -113,6 +118,7 @@ namespace MtnSports.Controllers
             return View(item);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
