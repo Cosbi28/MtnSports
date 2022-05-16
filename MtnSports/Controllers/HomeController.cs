@@ -31,9 +31,10 @@ namespace MtnSports.Controllers
         [HttpPost] 
         public IActionResult Search([FromForm]SearchViewModel search)
         {
-            if(ModelState.IsValid)
+            if(ModelState.IsValid && (search.ReturnDate-search.PickUpDate).TotalDays>=1)
             {
-                
+                TempData["PickUpDate"] = search.PickUpDate;
+                TempData["ReturnDate"] = search.ReturnDate;
                 return RedirectToAction("Results","Item",search);
             }
             return RedirectToAction("Index");
