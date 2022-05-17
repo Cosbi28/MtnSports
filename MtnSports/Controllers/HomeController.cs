@@ -28,6 +28,11 @@ namespace MtnSports.Controllers
             return View();
         }
 
+        public IActionResult TermsAndConditions()
+        {
+            return View();
+        }
+
         [HttpPost] 
         public IActionResult Search([FromForm]SearchViewModel search)
         {
