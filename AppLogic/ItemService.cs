@@ -56,6 +56,38 @@ namespace AppLogic
             return items;
         }
 
+        public void RentItem(Item item, int quantity, string userId, DateTime pickupDate, DateTime returnDate)
+        {
+            item.Stock -= quantity;
+            _repositoryWrapper.ItemRepository.Update(item);
+            _repositoryWrapper.Save();
+
+            var rentDays = (int)(returnDate - pickupDate).TotalDays;
+            var totalPrice = item.Price * rentDays * quantity;
+
+            var newOrder = new Order()
+            {
+                IdUser = userId,
+                PickupDate = pickupDate,
+                ReturnDate = returnDate,
+                TotalPrice = totalPrice,
+
+            };
+
+            _repositoryWrapper.OrderRepository.Create(newOrder);
+            _repositoryWrapper.Save();
+
+            var itemOrder = new ItemOrder()
+            {
+                IdOrder = newOrder.Id,
+                IdItem = item.Id,
+                Quantity = quantity
+            };
+
+            _repositoryWrapper.ItemOrderRepository.Create(itemOrder);
+            _repositoryWrapper.Save();
+        }
+
         public void UpdateItem(Item item)
         {
             _repositoryWrapper.ItemRepository.Update(item);

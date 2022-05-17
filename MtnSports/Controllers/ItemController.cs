@@ -126,5 +126,26 @@ namespace MtnSports.Controllers
             _itemService.DeleteItem(_itemService.GetItemById(id));
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize]
+        public IActionResult Rent(int id)
+        {
+            var item = _itemService.GetItemById(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return View(item);
+        }
+
+        [Authorize(Roles = "User")]
+        [HttpPost, ActionName("Rent")]
+        [ValidateAntiForgeryToken]
+        public IActionResult RentConfirmed(int id, int quantity, string userId)
+        {           
+            _itemService.RentItem(_itemService.GetItemById(id), quantity, userId, (DateTime)TempData["PickUpDate"], (DateTime)TempData["ReturnDate"]);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

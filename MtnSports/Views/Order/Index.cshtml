@@ -61,7 +61,7 @@
                             </td>
                         }
 
-                        @if ((@item.PickupDate< DateTime.Now && @item.ReturnDate > DateTime.Now) || @item.IsReturned == false )
+                        @if ((@item.PickupDate < DateTime.Now && @item.ReturnDate > DateTime.Now) && @item.IsReturned == false )
                         {
                             <td>
                                 <a asp-action="Return" asp-route-id="@item.Id" class="btn btn-primary">Return</a>

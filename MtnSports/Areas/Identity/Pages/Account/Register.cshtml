@@ -1,4 +1,4 @@
-﻿@page "/Register"
+﻿@page 
 @model RegisterModel
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +45,7 @@
                 <button id="registerSubmit" type="submit" class="btn btn-primary">Register</button>
             </div>
 
-            <p class="text-center text-muted mt-3 mb-1">Have already an account? <a href="Login" class="fw-bold"><u>Login here</u></a></p>
-
+            <p class="text-center text-muted mt-3 mb-1">Have already an account? <a class="fw-bold"  asp-area="Identity" asp-page="/Account/Login"><u>Login here</u></a></p>
         </form>
     </div>
 </body>
