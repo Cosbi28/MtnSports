@@ -16,7 +16,6 @@ namespace Abstractions.Services
         List<Item> GetAllItems();
         List<Item> GetSearchResults(SearchViewModel search);
         List<Item> GetSortedResults(string sort, List<Item> items);
-
-
+        void RentItem(Item item, int quantity, string userId, DateTime pickupDate, DateTime returnDate);
     }
 }

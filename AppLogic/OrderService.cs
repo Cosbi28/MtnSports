@@ -48,10 +48,11 @@ namespace AppLogic
         {
             order.IsReturned = true;
             _repositoryWrapper.OrderRepository.Update(order);
-            _repositoryWrapper.Save();
 
             var itemOrder = _repositoryWrapper.ItemOrderRepository.FindByCondition(c => c.IdOrder == order.Id).FirstOrDefault();
             _repositoryWrapper.ItemRepository.UpdateItemStock(itemOrder.IdItem, itemOrder.Quantity);
+
+            _repositoryWrapper.Save();
         }
 
         public void UpdateOrder(Order order)
