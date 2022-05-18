@@ -46,7 +46,7 @@
                             @Html.DisplayFor(modelItem => item.ReturnDate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TotalPrice)
+                            @Html.DisplayFor(modelItem => item.TotalPrice) $
                         </td>
                         @if (@item.PickupDate < DateTime.Now)
                         {
