@@ -18,15 +18,15 @@
             </div>
             <div class="container-fluid" style="font-size:25px">
                 <div class="container-fluid" style="font-size:25px">
-                    <h3 class="text-primary">
+                    <h4 class="text-primary">
                         Brand: @Html.DisplayFor(modelItem => Model.Brand)
-                    </h3>
-                    <h3 class="text-primary">
+                    </h4>
+                    <h4 class="text-primary">
                         Size: @Html.DisplayFor(modelItem => Model.Size)
-                    </h3>
-                    <h3 class="text-primary mb-4">
-                        Price: @Html.DisplayFor(modelItem => Model.Price)
-                    </h3>
+                    </h4>
+                    <h4 class="text-primary mb-4">
+                        Price: @Html.DisplayFor(modelItem => Model.Price) $/day
+                    </h4>
                     <div>
                         @Html.DisplayFor(modelItem => Model.Description)
                     </div>
@@ -43,7 +43,7 @@
 
             <div>
                 <a asp-action="Rent" asp-route-id="@Model?.Id" class="btn btn-primary me-1">Rent</a>
-                <a asp-action="Index" class="btn btn-info">Back</a>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-info">Back</a>
             </div>
         </div>
     </main>
