@@ -24,6 +24,18 @@ namespace AppLogic
             _repositoryWrapper.Save();
         }
 
+        public void DeleteOrder(ItemOrder itemOrder)
+        {
+            _repositoryWrapper.ItemOrderRepository.Delete(itemOrder);
+            _repositoryWrapper.Save();
+        }
+
+        public void UpdateOrder(ItemOrder itemOrder)
+        {
+            _repositoryWrapper.ItemOrderRepository.Update(itemOrder);
+            _repositoryWrapper.Save();
+        }
+
         public List<ItemOrder> GetAllItemOrders()
         {
             return _repositoryWrapper.ItemOrderRepository.FindAll().ToList();
@@ -33,5 +45,6 @@ namespace AppLogic
         {
             return _repositoryWrapper.ItemOrderRepository.FindByCondition(c => c.IdOrder == orderId).FirstOrDefault();
         }
+
     }
 }
