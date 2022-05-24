@@ -38,6 +38,15 @@ namespace UnitTest
 
             Assert.AreEqual(itemOrder.Id, secondItemOrder.Id);       
         }
+        
+        [TestMethod]
+        public void GetAllItemOrders_ShouldReturnAllItem()
+        {
+            var itemsOrderService = new ItemOrderService(_repositoryWrapper);
+            var itemOrderList = itemsOrderService.GetAllItemOrders();
+
+            Assert.Equals(4, itemOrderList.Count());
+        }
 
         [TestMethod]
         public void CreateOrder_ShouldCreateOrder()
