@@ -82,7 +82,20 @@ namespace UnitTest
             var secondOrder = orderService.GetOrderById(order.Id);
             Assert.AreEqual(order.Id, secondOrder.Id);
         }
-       
+
+        [TestMethod]
+        public void GetUserOrders_ShouldReturnAllUserOrders()
+        {
+            var orderService = new OrderService(_repositoryWrapper);
+            var idUser = "074e44bc-a24d-4f06-992f-0096ccf7aafc";
+
+            var orderList = orderService.GetUserOrders(idUser);
+            
+            foreach (var order in orderList)
+            {
+                Assert.AreEqual(order.IdUser, idUser);
+            }            
+        }
 
         [TestMethod]
         public void DeleteOrder_ShouldDeleteInDb()
@@ -95,9 +108,5 @@ namespace UnitTest
             var lastOrder = orderService.GetAllOrders().Last();
             Assert.AreNotEqual(order.Id, lastOrder.Id);
         }
-
-        
-
-
     }
 }
