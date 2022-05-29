@@ -38,12 +38,14 @@ namespace AppLogic
 
         public List<ItemOrder> GetAllItemOrders()
         {
-            return _repositoryWrapper.ItemOrderRepository.FindAll().ToList();
+            //return _repositoryWrapper.ItemOrderRepository.FindAll().ToList();
+            return _repositoryWrapper.ItemOrderRepository.GetAllItemOrders();
         }
 
         public ItemOrder GetItemOrderByOrderId(int orderId)
         {
-            return _repositoryWrapper.ItemOrderRepository.FindByCondition(c => c.IdOrder == orderId).FirstOrDefault();
+            //return _repositoryWrapper.ItemOrderRepository.FindByCondition(c => c.IdOrder == orderId).FirstOrDefault();
+            return _repositoryWrapper.ItemOrderRepository.GetItemOrderByOrderId(orderId);
         }
 
     }

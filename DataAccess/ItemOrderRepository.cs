@@ -13,5 +13,15 @@ namespace DataAccess
         public ItemOrderRepository(MtnSportsAppContext mtnSportsAppContext) : base(mtnSportsAppContext)
         {
         }
+
+        public List<ItemOrder> GetAllItemOrders()
+        {
+            return _mtnSportsAppContext.ItemOrders.ToList();
+        }
+
+        public ItemOrder GetItemOrderByOrderId(int orderId)
+        {
+            return _mtnSportsAppContext.ItemOrders.Where(c => c.IdOrder == orderId).FirstOrDefault();
+        }
     }
 }
