@@ -9,6 +9,16 @@ namespace DataAccess
         {
         }
 
+        public List<Item> GetAllItems()
+        {
+            return _mtnSportsAppContext.Items.ToList();
+        }
+
+        public Item GetItemById(int itemId)
+        {
+            return _mtnSportsAppContext.Items.Where(c => c.Id == itemId).FirstOrDefault();
+        }
+
         public void UpdateItemStock(int itemId, int returnedQuantity)
         {
             var item = _mtnSportsAppContext.Items.Where(c => c.Id == itemId).FirstOrDefault();

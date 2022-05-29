@@ -27,12 +27,14 @@ namespace AppLogic
 
         public List<Item> GetAllItems()
         {
-            return _repositoryWrapper.ItemRepository.FindAll().ToList();
+            return _repositoryWrapper.ItemRepository.GetAllItems();
+            //return _repositoryWrapper.ItemRepository.FindAll().ToList();
         }
 
         public Item GetItemById(int id)
         {
-            return _repositoryWrapper.ItemRepository.FindByCondition(c => c.Id == id).FirstOrDefault();
+            return _repositoryWrapper.ItemRepository.GetItemById(id);
+            //return _repositoryWrapper.ItemRepository.FindByCondition(c => c.Id == id).FirstOrDefault();
         }
 
         public List<Item> GetSearchResults(SearchViewModel search)
