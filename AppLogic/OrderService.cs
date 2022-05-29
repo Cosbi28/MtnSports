@@ -31,12 +31,14 @@ namespace AppLogic
 
         public List<Order> GetAllOrders()
         {
-            return _repositoryWrapper.OrderRepository.FindAll().ToList();
+            //return _repositoryWrapper.OrderRepository.FindAll().ToList();
+            return _repositoryWrapper.OrderRepository.GetAllOrders();  
         }
 
         public Order GetOrderById(int id)
         {
-            return _repositoryWrapper.OrderRepository.FindByCondition(c => c.Id == id).FirstOrDefault();
+            //return _repositoryWrapper.OrderRepository.FindByCondition(c => c.Id == id).FirstOrDefault();
+            return _repositoryWrapper.OrderRepository.GetOrderById(id);
         }
 
         public List<Order> GetUserOrders(string userId)
