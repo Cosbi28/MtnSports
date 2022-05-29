@@ -9,5 +9,7 @@ namespace Abstractions.Repositories
 {
     public interface IItemOrderRepository : IRepositoryBase<ItemOrder>
     {
+        ItemOrder GetItemOrderByOrderId(int orderId);
+        List<ItemOrder> GetAllItemOrders();
     }
 }
